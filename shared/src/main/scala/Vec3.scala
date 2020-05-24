@@ -17,8 +17,8 @@ object Vec3{
   def -(u: Vec3, v: Vec3): Vec3 = new Vec3(u.x - v.x, u.y - v.y, u.z - v.z)
   def *(u: Vec3, v: Vec3): Vec3 = new Vec3(u.x * v.x, u.y * v.y, u.z * v.z)
   def /(u: Vec3, v: Vec3): Vec3 = new Vec3(u.x / v.x, u.y / v.y, u.z / v.z)
-  def *(u: Vec3, t: Double): Vec3 = new Vec3(t * u.x, t * u.y, t * u.z)
-  def *(t: Double, u: Vec3): Vec3 = Vec3.*(u, t) // dziwnie to wygląda
+  def *(u: Vec3, t: Double): Vec3 = u *= t
+  def *(t: Double, u: Vec3): Vec3 = u *= t
   def /(u: Vec3, t: Double): Vec3 = new Vec3(u.x / t, u.y / t, u.z / t)
   def dot(u: Vec3, v: Vec3): Double = (u.x * v.x) + (u.y * v.y) + (u.z * v.z)
   def cross(u: Vec3, v: Vec3): Vec3 =

@@ -23,6 +23,6 @@ object Vec3{
   def dot(u: Vec3, v: Vec3): Double = (u.x * v.x) + (u.y * v.y) + (u.z * v.z)
   def cross(u: Vec3, v: Vec3): Vec3 =
     new Vec3(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x)
-  def unitVector(u: Vec3): Vec3 = Vec3(Vec3./(u, u.length()))
+  def unitVector(u: Vec3): Vec3 = u /= u.length()
   type point3 = Vec3
 }

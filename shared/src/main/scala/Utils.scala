@@ -23,16 +23,15 @@ object Utils {
     val viewportWidth = ratio * viewportHeight
     val focalLength = 1.0
 
-    val origin = Vec3()
+    val origin = Vec3(0, 0, 0)
     val horizontal = Vec3(viewportWidth, 0, 0)
     val vertical = Vec3(0, viewportHeight, 0)
     val LowerLeftCorner = origin - (horizontal /= 2) - (vertical /= 2) - Vec3(0, 0, focalLength)
-
     val pixels = (height - 1 to 0 by -1)
       .map(j => (0 to width - 1).map(i => Ray.rayColor(
         Ray(
           origin,
-          LowerLeftCorner + (horizontal *= i.toDouble/width-1) + (vertical *= j.toDouble/height-1) - origin
+          LowerLeftCorner + (horizontal *= (i.toDouble/(width-1))) + (vertical *= (j.toDouble/(height-1))) - origin
         ))).toVector)
       .toVector
 

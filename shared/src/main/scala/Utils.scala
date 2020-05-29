@@ -24,14 +24,15 @@ object Utils {
 
     val pixels = (height - 1 to 0 by -1)
       .map(j => (0 until width)
-        .map(i => (0 until Utils.samples_per_pixel)
+        .map(i => (0 until Utils.samples)
           .map(_ => Ray.rayColor(camera.get_ray((i + Utils.random_double()) / (width - 1),
-            (j + Utils.random_double()) / (height - 1)), world)).foldLeft(Vec3(0,0,0))(_ + _).castToColor()).toVector).toVector
+            (j + Utils.random_double()) / (height - 1)), world, Utils.max_depth)).foldLeft(Vec3(0,0,0))(_ + _).castToColor()).toVector).toVector
 
     Image(width, height, pixels)
   }
 
-  val samples_per_pixel : Int = 100
+  val samples : Int = 100
+  val max_depth : Int = 50
 
   def clamp(x: Double, min: Double, max: Double): Double = {
     if (x < min) {

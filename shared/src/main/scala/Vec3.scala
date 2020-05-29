@@ -63,6 +63,8 @@ object Vec3 {
     new Vec3(r * math.cos(a), r * math.sin(a), z)
   }
 
+  def reflect(v: Vec3, n: Vec3): Vec3 =
+    v - Vec3.*(2 * dot(v, n), n)
 
   @tailrec
   def randomInUnitSphere(): Vec3 = {

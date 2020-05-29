@@ -11,3 +11,16 @@ case class Lambertian(albedo: Vec3) extends Material {
     Some((scattered, attenuation))
   }
 }
+
+case class Metal(albedo: Vec3, fuzz: Double) extends Material {
+  require(0 <= fuzz && fuzz <= 1)
+
+  override def scatter(in: Ray, rec: Hit_record): Option[(Ray, Vec3)] = {
+    val reflected = Vec3.reflect(Vec3.unitVector(in.direction), rec.normal)
+    val scattered = Ray(rec.p, reflected + Vec3.*(Vec3.randomInUnitSphere(), fuzz))
+    val attenuation = albedo
+    if (Vec3.dot(scattered.direction, rec.normal) > 0)
+      Some((scattered, attenuation))
+    else None
+  }
+}

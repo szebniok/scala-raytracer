@@ -12,13 +12,13 @@ object Utils {
   }
 
   def generateBackground(): Image = {
-    val ratio = 16.0/9.0
+    val ratio = 16.0 / 9.0
     val width = 384
     val height = (width / ratio).toInt
 
     val world = new Hittable_list()
-    world.add(new Sphere(Vec3(0,0,-1), 0.5))
-    world.add(new Sphere(Vec3(0,-100.5,-1), 100))
+    world.add(new Sphere(Vec3(0, 0, -1), 0.5, Lambertian(Vec3(0.7, 0.3, 0.3))))
+    world.add(new Sphere(Vec3(0, -100.5, -1), 100, Lambertian(Vec3(0.8, 0.8, 0))))
 
     val camera = new Camera
 
@@ -26,12 +26,13 @@ object Utils {
       .map(j => (0 until width)
         .map(i => (0 until Utils.samples_per_pixel)
           .map(_ => Ray.rayColor(camera.get_ray((i + Utils.random_double()) / (width - 1),
-            (j + Utils.random_double()) / (height - 1)), world)).foldLeft(Vec3(0,0,0))(_ + _).castToColor()).toVector).toVector
+            (j + Utils.random_double()) / (height - 1)), world, maxDepth)).foldLeft(Vec3(0,0,0))(_ + _).castToColor()).toVector).toVector
 
     Image(width, height, pixels)
   }
 
-  val samples_per_pixel : Int = 100
+  val samples_per_pixel: Int = 100
+  val maxDepth: Int = 50
 
   def clamp(x: Double, min: Double, max: Double): Double = {
     if (x < min) {

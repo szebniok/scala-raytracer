@@ -1,6 +1,6 @@
 import Vec3.point3
 
-class Sphere (val center: point3, val radius: Double) extends Hittable {
+class Sphere (val center: point3, val radius: Double, val material: Material) extends Hittable {
 
   override def hit(r: Ray, t_min: Double, t_max: Double, rec: Hit_record): Boolean = {
     val oc = r.origin - center
@@ -17,6 +17,7 @@ class Sphere (val center: point3, val radius: Double) extends Hittable {
         rec.normal = (rec.p - center) /= radius
         val outward_normal = (rec.p - center) /= radius
         rec.set_face_normal(r, outward_normal)
+        rec.material = material
         return true
       }
       else{
@@ -27,6 +28,7 @@ class Sphere (val center: point3, val radius: Double) extends Hittable {
           rec.normal = (rec.p - center) /= radius
           val outward_normal = (rec.p - center) /= radius
           rec.set_face_normal(r, outward_normal)
+          rec.material = material
           return true
         }
       }

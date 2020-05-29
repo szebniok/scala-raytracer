@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 class Vec3(val x: Double, val y: Double, val z: Double) {
   def +(other: Vec3) = new Vec3(x + other.x, y + other.y, z + other.z)
   def -(other: Vec3) = new Vec3(x - other.x, y - other.y, z - other.z)
@@ -7,18 +9,20 @@ class Vec3(val x: Double, val y: Double, val z: Double) {
   def lengthSquared(): Double = (x * x) + (y * y) + (z * z)
   def length(): Double = Math.sqrt(lengthSquared())
   def castToColor(): Color = {
-    val r = x * 1 / Utils.samples_per_pixel
-    val g = y * 1 / Utils.samples_per_pixel
-    val b = z * 1 / Utils.samples_per_pixel
+    val scale = 1D / Utils.samples_per_pixel
+    val r = math.sqrt(x * scale)
+    val g = math.sqrt(y * scale)
+    val b = math.sqrt(z * scale)
     Color(
       (256 * Utils.clamp(r, 0.0, 0.999)).toInt,
       (256 * Utils.clamp(g, 0.0, 0.999)).toInt,
-      (256 * Utils.clamp(b, 0.0, 0.999)).toInt)
+      (256 * Utils.clamp(b, 0.0, 0.999)).toInt
+    )
   }
 
 }
 
-object Vec3{
+object Vec3 {
   def apply(x: Double, y: Double, z: Double) = new Vec3(x, y, z)
   def apply() = new Vec3(0, 0, 0)
   def apply(prototype: Vec3) = new Vec3(prototype.x, prototype.y, prototype.z)
@@ -31,7 +35,41 @@ object Vec3{
   def /(u: Vec3, t: Double): Vec3 = new Vec3(u.x / t, u.y / t, u.z / t)
   def dot(u: Vec3, v: Vec3): Double = (u.x * v.x) + (u.y * v.y) + (u.z * v.z)
   def cross(u: Vec3, v: Vec3): Vec3 =
-    new Vec3(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x)
+    new Vec3(
+      u.y * v.z - u.z * v.y,
+      u.z * v.x - u.x * v.z,
+      u.x * v.y - u.y * v.x
+    )
   def unitVector(u: Vec3): Vec3 = u /= u.length()
+
+  def random(): Vec3 =
+    new Vec3(
+      Utils.random_double(),
+      Utils.random_double(),
+      Utils.random_double()
+    )
+
+  def random(min: Double, max: Double): Vec3 =
+    new Vec3(
+      Utils.random_double(min, max),
+      Utils.random_double(min, max),
+      Utils.random_double(min, max)
+    )
+
+  def randomUnitVector(): Vec3 = {
+    val a = Utils.random_double(0, 2 * math.Pi)
+    val z = Utils.random_double(-1, 1)
+    val r = math.sqrt(1 - z*z)
+    new Vec3(r * math.cos(a), r * math.sin(a), z)
+  }
+
+
+  @tailrec
+  def randomInUnitSphere(): Vec3 = {
+    val p = Vec3.random(-1, 1)
+    if (p.lengthSquared() >= 1) randomInUnitSphere()
+    else p
+  }
+
   type point3 = Vec3
 }

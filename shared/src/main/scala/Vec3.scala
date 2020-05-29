@@ -6,7 +6,16 @@ class Vec3(val x: Double, val y: Double, val z: Double) {
   def /=(t: Double) = new Vec3(x / t, y / t, z / t)
   def lengthSquared(): Double = (x * x) + (y * y) + (z * z)
   def length(): Double = Math.sqrt(lengthSquared())
-  def castToColor(): Color = Color((x*255.999).toInt, (y*255.999).toInt, (z*255.999).toInt)
+  def castToColor(): Color = {
+    val r = x * 1 / Utils.samples_per_pixel
+    val g = y * 1 / Utils.samples_per_pixel
+    val b = z * 1 / Utils.samples_per_pixel
+    Color(
+      (256 * Utils.clamp(r, 0.0, 0.999)).toInt,
+      (256 * Utils.clamp(g, 0.0, 0.999)).toInt,
+      (256 * Utils.clamp(b, 0.0, 0.999)).toInt)
+  }
+
 }
 
 object Vec3{

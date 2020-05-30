@@ -73,5 +73,15 @@ object Vec3 {
     else p
   }
 
+  def randomPointInHemisphere(normal: Vec3): Vec3 = {
+    val point_in_sphere = Vec3.randomInUnitSphere()
+    if(Vec3.dot(point_in_sphere, normal) > 0.0){
+      point_in_sphere
+    }
+    else{
+      -point_in_sphere
+    }
+  }
+
   type point3 = Vec3
 }

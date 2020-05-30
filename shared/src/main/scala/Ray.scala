@@ -12,7 +12,10 @@ object Ray {
       if (world.hit(r, 0.001, Double.PositiveInfinity, rec)) {
         rec.material.scatter(r, rec) match {
           case Some((scattered, attenuation)) =>
-            Vec3.*(rayColor(scattered, world, depth - 1), attenuation)
+            if (scattered.direction.lengthSquared() == 0)
+              attenuation
+            else
+              Vec3.*(rayColor(scattered, world, depth - 1), attenuation)
           case None => Vec3(0, 0, 0)
         }
       } else {

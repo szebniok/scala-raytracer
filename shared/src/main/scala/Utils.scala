@@ -18,10 +18,13 @@ object Utils {
 
     val world = new Hittable_list()
     world.add(new Sphere(Vec3(0, 0, -1), 0.5, Lambertian(Vec3(0.7, 0.3, 0.3))))
-    world.add(new Sphere(Vec3(0, -100.5, -1), 100, Lambertian(Vec3(0.8, 0.8, 0))))
+    world.add(new Sphere(Vec3(0, -100.5, -1), 100, Lambertian(Vec3(0.8, 0.8, 0.03))))
 
     world.add(new Sphere(Vec3(1, 0, -1), 0.5, Metal(Vec3(0.8, 0.6, 0.2), 1)))
     world.add(new Sphere(Vec3(-1, 0, -1), 0.5, Metal(Vec3(0.8, 0.8, 0.8), 0.3)))
+
+    world.add(new Sphere(Vec3(2, 2, 2), 2, Light(Vec3(2, 2, 2))))
+    world.add(new Sphere(Vec3(0.55, -0.35, -1), 0.1, Light(Vec3(0, 0, 20))))
 
     val camera = new Camera
 
@@ -34,7 +37,7 @@ object Utils {
     Image(width, height, pixels)
   }
 
-  val samples_per_pixel: Int = 100
+  val samples_per_pixel: Int = 200
   val maxDepth: Int = 50
 
   def clamp(x: Double, min: Double, max: Double): Double = {

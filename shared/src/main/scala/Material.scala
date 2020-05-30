@@ -24,3 +24,11 @@ case class Metal(albedo: Vec3, fuzz: Double) extends Material {
     else None
   }
 }
+
+case class Light(albedo: Vec3) extends Material {
+  override def scatter(in: Ray, rec: Hit_record): Option[(Ray, Vec3)] = {
+    val scattered = Ray(rec.p, Vec3(0, 0, 0))
+    val attenuation = albedo
+    Some((scattered, attenuation))
+  }
+}

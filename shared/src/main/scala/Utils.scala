@@ -26,7 +26,13 @@ object Utils {
     world.add(new Sphere(Vec3(-1, 0, -1), 0.5, Dielectric(1.5)))
     world.add(new Sphere(Vec3(-1, 0, -1), -0.45, Dielectric(1.5)))
 
-    val camera = new Camera(new point3(-2, 2, 1), new point3(0, 0, -1), Vec3(0, 1, 0), 20, ratio)
+    val lookfrom = new point3(3, 3, 2)
+    val lookat = new point3(0, 0, -1)
+    val vup = Vec3(0, 1, 0)
+    val distToFocus = (lookfrom - lookat).length()
+    val aperture = 2.0
+
+    val camera = new Camera(lookfrom, lookat, vup, 20, ratio, aperture, distToFocus)
 
     val pixels = (height - 1 to 0 by -1)
       .map(j => (0 until width)

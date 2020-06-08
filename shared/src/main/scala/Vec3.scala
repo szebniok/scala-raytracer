@@ -89,5 +89,14 @@ object Vec3 {
     val rOutPerp = Vec3.*(n, -Math.sqrt(1.0 - rOutParallel.lengthSquared()))
     rOutParallel + rOutPerp
   }
+
+  @tailrec
+  def randomInUnitDisk(): Vec3 ={
+    val p = Vec3(Utils.random_double(-1.0, 1.0), Utils.random_double(-1.0, 1.0), 0)
+    if(p.lengthSquared() >= 1) randomInUnitDisk()
+    else p
+  }
+
   type point3 = Vec3
+
 }

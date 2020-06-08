@@ -24,3 +24,15 @@ class Camera(lookfrom: point3, lookat: point3, vup: Vec3, vfov: Double, aspectRa
     Ray(origin + offset, lowerLeftCorner + (horizontal *= s) + (vertical *= t) - origin - offset)
   }
 }
+
+object Camera {
+  def exampleCamera(): Camera = {
+    val lookfrom = new point3(13, 2, 3)
+    val lookat = new point3(0, 0, 0)
+    val vup = Vec3(0, 1, 0)
+    val distToFocus = 10.0
+    val aperture = 0.1
+
+    new Camera(lookfrom, lookat, vup, 20, 16.0 / 9.0, aperture, distToFocus)
+  }
+}

@@ -56,6 +56,20 @@ object Utils {
     x
   }
 
+  def getImage(world: Hittable_list, camera: Camera, width: Int): Image = {
+    val ratio = 16.0 / 9.0
+    val height = (width / ratio).toInt
+
+    val pixels = (height - 1 to 0 by -1)
+      .map(j => (0 until width)
+        .map(i => (0 until Utils.samples_per_pixel)
+          .map(_ => Ray.rayColor(camera.get_ray((i + Utils.random_double()) / (width - 1),
+            (j + Utils.random_double()) / (height - 1)), world, maxDepth)).foldLeft(Vec3(0,0,0))(_ + _).castToColor()).toVector).toVector
+
+    Image(width, height, pixels)
+  }
+
+
   def random_double(): Double = {
     val r = scala.util.Random
     r.nextDouble()

@@ -21,7 +21,8 @@ object Utils {
     world.add(new Sphere(Vec3(0, -100.5, -1), 100, Lambertian(Vec3(0.8, 0.8, 0))))
 
     world.add(new Sphere(Vec3(1, 0, -1), 0.5, Metal(Vec3(0.8, 0.6, 0.2), 1)))
-    world.add(new Sphere(Vec3(-1, 0, -1), 0.5, Metal(Vec3(0.8, 0.8, 0.8), 0.3)))
+    world.add(new Sphere(Vec3(-1, 0, -1), 0.5, Dielectric(1.5)))
+    world.add(new Sphere(Vec3(-1, 0, -1), -0.45, Dielectric(1.5)))
 
     val camera = new Camera
 

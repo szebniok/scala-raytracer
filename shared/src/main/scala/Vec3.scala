@@ -83,5 +83,11 @@ object Vec3 {
     }
   }
 
+  def refract(uv: Vec3, n: Vec3, etaiOverEtat: Double): Vec3 = {
+    val cosTheta = dot(-uv, n)
+    val rOutParallel = Vec3.*(etaiOverEtat, (uv + Vec3.*(cosTheta , n)))
+    val rOutPerp = Vec3.*(n, -Math.sqrt(1.0 - rOutParallel.lengthSquared()))
+    rOutParallel + rOutPerp
+  }
   type point3 = Vec3
 }

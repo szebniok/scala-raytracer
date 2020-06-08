@@ -1,3 +1,5 @@
+import Vec3.point3
+
 object Utils {
 
   def generateSampleGradient(): Image = {
@@ -24,7 +26,7 @@ object Utils {
     world.add(new Sphere(Vec3(-1, 0, -1), 0.5, Dielectric(1.5)))
     world.add(new Sphere(Vec3(-1, 0, -1), -0.45, Dielectric(1.5)))
 
-    val camera = new Camera
+    val camera = new Camera(new point3(-2, 2, 1), new point3(0, 0, -1), Vec3(0, 1, 0), 20, ratio)
 
     val pixels = (height - 1 to 0 by -1)
       .map(j => (0 until width)

@@ -1,17 +1,21 @@
 import Vec3.point3
 
-class Camera {
+class Camera(lookfrom: point3, lookat: point3, vup: Vec3, vfov: Double, aspectRatio: Double) {
 
-  val aspect_ratio: Double = 16.0 / 9.0
-  val viewport_height: Double = 2.0
-  val viewport_width: Double = aspect_ratio * viewport_height
-  val focal_length: Double = 1.0
+  val theta: Double = Math.toRadians(vfov)
+  val h: Double = Math.tan(theta/2)
+  val viewportHeight: Double = 2.0 * h
+  val viewportWidth: Double = aspectRatio * viewportHeight
 
-  private val origin: point3 = new point3(0, 0, 0)
-  private var horizontal: Vec3 = Vec3(viewport_width, 0.0, 0.0)
-  private var vertical: Vec3 = Vec3(0.0, viewport_height, 0.0)
-  private val lower_left_corner: point3 = origin - (horizontal /= 2) - (vertical /= 2) - Vec3(0, 0, focal_length)
+  val w: Vec3 = Vec3.unitVector(lookfrom - lookat)
+  val u: Vec3 = Vec3.unitVector(Vec3.cross(vup, w))
+  val v: Vec3 = Vec3.cross(w, u)
+
+  private val origin: point3 = lookfrom
+  private var horizontal: Vec3 = Vec3.*(viewportWidth, u)
+  private var vertical: Vec3 = Vec3.*(viewportHeight, v)
+  private val lowerLeftCorner: point3 = origin - (horizontal /= 2) - (vertical /= 2) - w
 
   def get_ray(u: Double, v: Double): Ray =
-    Ray(origin, lower_left_corner + (horizontal *= u) + (vertical *= v) - origin)
+    Ray(origin, lowerLeftCorner + (horizontal *= u) + (vertical *= v) - origin)
 }

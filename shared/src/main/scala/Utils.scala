@@ -18,7 +18,7 @@ object Utils {
     val width = 384
     val height = (width / ratio).toInt
 
-    val world = new Hittable_list()
+    val world = new HittableList()
     world.add(new Sphere(Vec3(0, 0, -1), 0.5, Lambertian(Vec3(0.7, 0.3, 0.3))))
     world.add(new Sphere(Vec3(0, -100.5, -1), 100, Lambertian(Vec3(0.8, 0.8, 0))))
 
@@ -56,7 +56,7 @@ object Utils {
     x
   }
 
-  def getImage(world: Hittable_list, camera: Camera, width: Int): Image = {
+  def getImage(world: HittableList, camera: Camera, width: Int): Image = {
     val ratio = 16.0 / 9.0
     val height = (width / ratio).toInt
 

@@ -1,10 +1,9 @@
-import java.util
-
 import Vec3.point3
 
-class Hittable_list extends Hittable {
+import scala.collection.mutable.ArrayBuffer
 
-  var objects: util.LinkedList[Hittable] = new util.LinkedList[Hittable]()
+case class HittableList(objects: ArrayBuffer[Hittable]) extends Hittable {
+  def this() = this(new ArrayBuffer[Hittable]())
 
   def this(o: Hittable) = {
     this()
@@ -16,7 +15,7 @@ class Hittable_list extends Hittable {
   }
 
   def add(o: Hittable): Unit = {
-    objects.add(o)
+    objects.addOne(o)
   }
 
   def hit(r: Ray, t_min: Double, t_max: Double, rec: Hit_record): Boolean = {
@@ -24,7 +23,7 @@ class Hittable_list extends Hittable {
     var hit_anything: Boolean = false
     var closest_so_far = t_max
 
-    objects.forEach(o =>
+    objects.foreach(o =>
       if(o.hit(r, t_min, closest_so_far, temp_rec)){
         hit_anything = true
         closest_so_far = temp_rec.t
@@ -34,10 +33,11 @@ class Hittable_list extends Hittable {
     hit_anything
   }
 }
-object Hittable_list{
-  def randomScene(): Hittable_list = {
+
+object HittableList{
+  def randomScene(): HittableList = {
     val groundMaterial = Lambertian(Vec3(0.5, 0.5, 0.5))
-    val world = new Hittable_list()
+    val world = new HittableList()
     world.add(new Sphere(Vec3(0, -1000, 0), 1000, groundMaterial))
 
     for(x <- (-11) to 11) {

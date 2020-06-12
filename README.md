@@ -1,12 +1,12 @@
 Scala Raytracer
 ===
 
-*Project created as part of the "Programming in Scala" subject at AGH university of science*
+*Project created as part of the "Programming in Scala" subject at AGH University of Science and Technology*
 
 ## Team
-+ [Konrad Bochnia](github.com/szebniok)
-+ [Wiktor Tarsa](github.com/wtarsa)
-+ [Przemysław Wątroba](github.com/Przemyslaw5)
++ [Konrad Bochnia](https://github.com/szebniok)
++ [Wiktor Tarsa](https://github.com/wtarsa)
++ [Przemysław Wątroba](https://github.com/Przemyslaw5)
 
 ## Bulding on JVM
 

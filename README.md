@@ -27,3 +27,9 @@ sbt> raytracerJS/fastOptJS
 ```
 
 Open `raytracer.html` in your browser to see the result.
+
+## Output
+
+1920x1080 image, created using 300 samples per pixel.
+
+![](example.png)

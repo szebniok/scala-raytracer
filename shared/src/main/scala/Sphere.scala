@@ -2,7 +2,7 @@ import Vec3.point3
 
 class Sphere (val center: point3, val radius: Double, val material: Material) extends Hittable {
 
-  override def hit(r: Ray, t_min: Double, t_max: Double, rec: Hit_record): Boolean = {
+  override def hit(r: Ray, t_min: Double, t_max: Double, rec: HitRecord): Boolean = {
     val oc = r.origin - center
     val a = r.direction.lengthSquared()
     val half_b = Vec3.dot(oc, r.direction)

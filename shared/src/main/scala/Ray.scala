@@ -8,7 +8,7 @@ object Ray {
   def rayColor(r: Ray, world: Hittable, depth: Int): Vec3 =
     if (depth <= 0) new Vec3(0, 0, 0)
     else {
-      val rec: Hit_record = Hit_record()
+      val rec: HitRecord = HitRecord()
       if (world.hit(r, 0.001, Double.PositiveInfinity, rec)) {
         rec.material.scatter(r, rec) match {
           case Some((scattered, attenuation)) =>

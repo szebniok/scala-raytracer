@@ -1,6 +1,6 @@
 import Vec3.point3
 
-class Hit_record(
+class HitRecord(
     var p: point3,
     var normal: Vec3,
     var t: Double,
@@ -13,7 +13,7 @@ class Hit_record(
     else -outward_normal
   }
 
-  def set_args(r: Hit_record): Unit = {
+  def set_args(r: HitRecord): Unit = {
     this.p = r.p
     this.normal = r.normal
     this.t = r.t
@@ -22,14 +22,14 @@ class Hit_record(
   }
 }
 
-object Hit_record {
+object HitRecord {
   def apply(p: point3, normal: Vec3, t: Double, front_face: Boolean, lambertian: Lambertian) =
-    new Hit_record(p, normal, t, front_face, lambertian)
+    new HitRecord(p, normal, t, front_face, lambertian)
   def apply() =
-    new Hit_record(new point3(0, 0, 0), new point3(0, 0, 0), 0, false, Lambertian(Vec3(1, 1, 1)))
+    new HitRecord(new point3(0, 0, 0), new point3(0, 0, 0), 0, false, Lambertian(Vec3(1, 1, 1)))
 }
 
 trait Hittable{
-  def hit(r: Ray, t_min: Double, t_max: Double, rec: Hit_record): Boolean
+  def hit(r: Ray, t_min: Double, t_max: Double, rec: HitRecord): Boolean
 }
 

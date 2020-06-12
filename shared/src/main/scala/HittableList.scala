@@ -18,8 +18,8 @@ case class HittableList(objects: ArrayBuffer[Hittable]) extends Hittable {
     objects.addOne(o)
   }
 
-  def hit(r: Ray, t_min: Double, t_max: Double, rec: Hit_record): Boolean = {
-    val temp_rec: Hit_record = Hit_record()
+  def hit(r: Ray, t_min: Double, t_max: Double, rec: HitRecord): Boolean = {
+    val temp_rec: HitRecord = HitRecord()
     var hit_anything: Boolean = false
     var closest_so_far = t_max
 

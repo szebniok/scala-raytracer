@@ -7,13 +7,13 @@ class HitRecord(
     var front_face: Boolean,
     var material: Material){
 
-  def set_face_normal(r: Ray, outward_normal: Vec3): Unit = {
+  def setFaceNormal(r: Ray, outward_normal: Vec3): Unit = {
     front_face = Vec3.dot(r.direction, outward_normal) < 0
     normal = if (front_face) outward_normal
     else -outward_normal
   }
 
-  def set_args(r: HitRecord): Unit = {
+  def setArgs(r: HitRecord): Unit = {
     this.p = r.p
     this.normal = r.normal
     this.t = r.t

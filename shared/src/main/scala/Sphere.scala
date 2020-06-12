@@ -16,7 +16,7 @@ class Sphere (val center: point3, val radius: Double, val material: Material) ex
         rec.p = r.at(rec.t)
         rec.normal = (rec.p - center) /= radius
         val outward_normal = (rec.p - center) /= radius
-        rec.set_face_normal(r, outward_normal)
+        rec.setFaceNormal(r, outward_normal)
         rec.material = material
         return true
       }
@@ -27,7 +27,7 @@ class Sphere (val center: point3, val radius: Double, val material: Material) ex
           rec.p = r.at(rec.t)
           rec.normal = (rec.p - center) /= radius
           val outward_normal = (rec.p - center) /= radius
-          rec.set_face_normal(r, outward_normal)
+          rec.setFaceNormal(r, outward_normal)
           rec.material = material
           return true
         }

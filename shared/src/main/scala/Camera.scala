@@ -18,7 +18,7 @@ class Camera(lookfrom: point3, lookat: point3, vup: Vec3, vfov: Double, aspectRa
 
   private val lensRadius = aperture / 2
 
-  def get_ray(s: Double, t: Double): Ray = {
+  def getRay(s: Double, t: Double): Ray = {
     val rd = Vec3.*(lensRadius, Vec3.randomInUnitDisk())
     val offset = Vec3.*(u, rd.x) + Vec3.*(v, rd.y)
     Ray(origin + offset, lowerLeftCorner + (horizontal *= s) + (vertical *= t) - origin - offset)

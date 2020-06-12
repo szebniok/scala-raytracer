@@ -12,8 +12,8 @@ class Camera(lookfrom: point3, lookat: point3, vup: Vec3, vfov: Double, aspectRa
   private val v: Vec3 = Vec3.cross(w, u)
 
   private val origin: point3 = lookfrom
-  private var horizontal: Vec3 = Vec3.*(focusDist, Vec3.*(viewportWidth, u))
-  private var vertical: Vec3 = Vec3.*(focusDist, Vec3.*(viewportHeight, v))
+  private val horizontal: Vec3 = Vec3.*(focusDist, Vec3.*(viewportWidth, u))
+  private val vertical: Vec3 = Vec3.*(focusDist, Vec3.*(viewportHeight, v))
   private val lowerLeftCorner: point3 = origin - (horizontal /= 2) - (vertical /= 2) - Vec3.*(w, focusDist)
 
   private val lensRadius = aperture / 2

@@ -30,20 +30,20 @@ object Utils {
     val lookat = new point3(0, 0, -1)
     val vup = Vec3(0, 1, 0)
     val distToFocus = (lookfrom - lookat).length()
-    val aperture = 2.0
+    val aperture = 0.001
 
     val camera = new Camera(lookfrom, lookat, vup, 20, ratio, aperture, distToFocus)
 
     val pixels = (height - 1 to 0 by -1)
       .map(j => (0 until width)
-        .map(i => (0 until Utils.samples_per_pixel)
+        .map(i => (0 until samplesPerPixel)
           .map(_ => Ray.rayColor(camera.getRay((i + Utils.random_double()) / (width - 1),
             (j + Utils.random_double()) / (height - 1)), world, maxDepth)).foldLeft(Vec3(0,0,0))(_ + _).castToColor()).toVector).toVector
 
     Image(width, height, pixels)
   }
 
-  val samples_per_pixel: Int = 100
+  val samples_per_pixel: Int = 50
   val maxDepth: Int = 50
 
   def clamp(x: Double, min: Double, max: Double): Double = {

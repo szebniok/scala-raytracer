@@ -40,8 +40,8 @@ object HittableList{
     val world = new HittableList()
     world.add(new Sphere(Vec3(0, -1000, 0), 1000, groundMaterial))
 
-    for(x <- (-11) to 11) {
-      for(y <- (-11) to 11) {
+    for(x <- (-5) to 5) {
+      for(y <- (-5) to 5) {
         val chooseMaterial = Utils.random_double()
         val center = new point3(x + 0.9*Utils.random_double(), 0.2, y + 0.9*Utils.random_double())
 

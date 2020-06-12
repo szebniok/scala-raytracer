@@ -13,7 +13,7 @@ object Utils {
     Image(width, height, pixels)
   }
 
-  def generateBackground(): Image = {
+  def generateBackground(samplesPerPixel: Int): Image = {
     val ratio = 16.0 / 9.0
     val width = 384
     val height = (width / ratio).toInt

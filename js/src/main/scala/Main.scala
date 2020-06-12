@@ -1,7 +1,11 @@
 object Main extends App {
   val writer = new CanvasImageWriter()
-  val image = Utils.getImage(HittableList.randomScene(), Camera.exampleCamera(), 384)
 
-  writer.saveImage(Utils.generateBackground())
-  println("sbt")
+  val ratio = 16.0 / 9.0
+  val width = 384
+  val height = (width / ratio).toInt
+
+  val samplesPerPixel = 50
+
+  writer.saveImage(Utils.generateBackground(samplesPerPixel))
 }
